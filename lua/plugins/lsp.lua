@@ -21,6 +21,21 @@ return {
           },
         },
       })
+
+      lspconfig.tsserver.setup({
+        handlers = {
+          ["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
+            if result.diagnostics ~= nil then
+              -- Filter out specific diagnostic codes
+              result.diagnostics = vim.tbl_filter(function(diagnostic)
+                return diagnostic.code ~= 80006 and diagnostic.code ~= 80001
+              end, result.diagnostics)
+            end
+            vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
+          end,
+        },
+      })
+      lspconfig.eslint.setup({})
     end,
   },
 }

@@ -10,7 +10,7 @@ return {
         files = {
           ignored = true,
           hidden = true,
-          exclude = { "_build/", "deps/", ".elixir_ls" },
+          exclude = { "_build/", "deps/", ".elixir_ls", "node_modules" },
         },
       },
     },
